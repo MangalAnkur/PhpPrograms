@@ -1,0 +1,69 @@
+<html>
+<body style="background-color:powderblue;">
+<h1> Employee details </h1>
+<form action="" method="post">
+Enter Employee Name <br> <input type="text" name="ENAME"><br>
+Enter Employee Id <br> <input type="text" name="ID"><br>
+Enter Employee Age <br> <input type="text" name="AGE"><br>
+Enter Employee Salary <br> <input type="text" name="SALARY"><br>
+Gender:<br>
+<input type="radio" name="Gender" value="Male">Male<br>
+<input type="radio" name="Gender" value="Female">Female<br>
+<input type="radio" name="Gender" value="Other">Other<br>
+Designation:<br>
+<input type="radio" name="Designation" value="PROGRAMMER">Programmer<br>
+<input type="radio" name="Designation" value="PROJECT LEAD">Project leader<br>
+<input type="radio" name="Designation" value="TEAM MEMBER">Team Member<br>
+
+<input type="submit" value="click to Submit"><br>
+</form>
+</body>
+</html>
+<?php 
+if($_POST)
+{
+	$name=$_POST['ENAME'];
+	$age=$_POST['AGE'];
+	$salary=$_POST['SALARY'];
+	$id=$_POST['ID'];
+	$gender=$_POST['Gender'];
+	$des=$_POST['Designation'];
+	
+	class Employee
+	{
+		function details()
+		{
+			global $name,$age,$salary,$id,$gender,$des;
+			echo "Employee details are","<br>";
+			echo "Name is ",$name,"<br>";
+			echo "Age is ",$age,"<br>";
+			echo "Id is ",$id,"<br>";
+			echo "Salary is ",$salary,"<br>";
+			echo "Gender is ",$gender,"<br>";
+		}
+		function employeedetails ()
+		{
+			global $name,$age,$salary,$id,$gender,$des;
+		   try 
+			{
+				if(empty($des))
+				{
+					throw new Exception("sorry!!!! employee details cannot be viewed");
+				} 
+				else 
+				{
+					$this->details();
+					echo "Designation is ",$des,"<br>";
+				}
+			}
+			catch (Exception $e)
+			{
+				echo "Exception is ",$e->getMessage(),"<br>";
+			}
+		}
+	}
+	
+$ob=new Employee();
+$ob->employeedetails();	
+}
+?>
