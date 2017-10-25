@@ -1,0 +1,62 @@
+
+<html>
+<head> <title>Student details</title>  </head>
+<body style="background-image:url('5.jpeg');">
+<center>
+<h2>Welcome to Learning Innovative Center </h2>
+<h2> For subscribe please enter your details</h2>
+<form method="post" action="1.php.php">
+<h3>
+Name<br><input type="text" name="NAME" ><br>
+Age<br><input type="text" name="AGE"><br>
+Moblie Number<br><input type="text" name="MB"><br>
+Mail-Id<br><input type="text" name="MI"><br>
+Address <br><input type="text" name="ADD"><br><br>
+<input type="submit" value="Submit"><br>
+</h3>
+</form>
+</center>
+</body>
+</html>
+
+
+
+
+
+<html>
+<body style="background-image:url('7.jpg');">
+<center>
+<h1> Thanks for subscribe</h1>
+<h1> Have a happy Day</h1>
+</center>
+</body>
+</html>
+<?php 
+if($_POST)
+{
+    global $name,$age,$mn,$mi,$add;
+	$name=$_POST['NAME'];
+	$age=$_POST['AGE'];
+	$mob=$_POST['MB'];
+	$mi=$_POST['MI'];
+	$add=$_POST['ADD'];
+	$conn=mysql_connect('localhost','root',"");
+	mysql_select_db('details',$conn);
+	$query="insert into stu_details (Name,Age,mobile,emailid,address) values ('$name','$age','$mob','$mi','$add')";
+    mysql_query($query);
+    $query1="select * from stu_details";
+	$arr=mysql_query($query1);
+	echo "<center>";
+	echo "<table border='1'>";
+	echo "<tr>";
+	echo "<th>Name</th><th>Age</th><th>mobile number</th><th>Email-id</th><th>Address</th>";
+	echo "</tr>";
+	while($result=mysql_fetch_array($arr))
+	{
+		echo "<tr>";
+		echo "<td>",$result['Name'],"</td><td>",$result['Age'],"</td><td>",$result['mobile'],"</td><td>",$result['emailid'],"</td><td>",$result['address'],"</td>";
+		echo "</tr>";
+	}
+	echo "</center>";
+}
+?>
