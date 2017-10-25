@@ -1,0 +1,97 @@
+<html>
+<body style="background-color:powderblue;">
+<h1> Feedback Form </h1>
+<form action="" method="post">
+Enter Faculty Name <br> <input type="text" name="FNAME"><br><br>
+Enter Subject Name <br> <input type="text" name="SUNAME"><br><br>
+Enter Date  <br> <input type="date" name="DATE"><br><br>
+Enter Your Name <br> <input type="text" name="YNAME"><br><br>
+Enter Your SAP ID <br> <input type="text" name="ID"><br><br>
+Ratings(1 - 10) Give Examples <br> <input type="text" name="RAT1"><br><br>
+Ratings(1 - 10) Using Whiteboard<br> <input type="text" name="RAT2"><br><br>
+Ratings(1 - 10) Teaching skills<br> <input type="text" name="RAT3"><br><br>
+Comments <br> <input type="text" name="COM"><br><br><br>
+<input type="submit" value="click to submit"><br><br>
+</form>
+ </body>
+</html>
+
+<?php 
+if($_POST)
+{
+	//global $fn,$sn,$dt,$yn,$sid,$rt1,$rt2,$rt3,$cts,$average,$x,$y,$space;
+	class Feedback
+	{
+	function fun()
+    {
+    global $fn,$sn,$dt,$yn,$sid,$rt1,$rt2,$rt3,$cts,$average,$x,$y,$space;
+	$fn=$_POST['FNAME'];
+	$sn=$_POST['SUNAME'];
+	$dt=$_POST['DATE'];
+	$yn=$_POST['YNAME'];
+	$sid=$_POST['ID'];
+	$rt1=$_POST['RAT1'];
+	$rt2=$_POST['RAT2'];
+	$rt3=$_POST['RAT3'];
+	$cts=$_POST['COM'];
+		}
+    function fun2()
+    {
+    global $fn,$sn,$dt,$yn,$sid,$rt1,$rt2,$rt3,$cts,$average,$x,$y,$space;
+	$average=($rt1+$rt2+$rt3)/3;
+	echo "Average rating by $yn for $fn is ",$average,"<br>";
+	echo "comment by $yn is ",$cts,"<br>";
+	$x="Comment is ";
+	$y="average rating is ";
+	
+	$handle=fopen("feedback.txt","a+");
+	$space="  ";
+	fwrite($handle,$fn);
+	fwrite($handle,$space);
+	fwrite($handle,$sn);
+	fwrite($handle,$space);
+	fwrite($handle,$dt);
+	fwrite($handle,$space);
+	fwrite($handle,$yn);
+	fwrite($handle,$space);
+	fwrite($handle,$sid);
+	fwrite($handle,$space);
+	fwrite($handle,$rt1);
+	fwrite($handle,$space);
+	fwrite($handle,$rt2);
+	fwrite($handle,$space);
+	fwrite($handle,$rt3);
+	fwrite($handle,$space);
+	fwrite($handle,$cts);
+	fwrite($handle,$space);
+	
+	
+	$handle1=fopen("feedback1.txt","a+");
+	if(!empty($cts))
+	{
+	fwrite($handle1,$x);
+	fwrite($handle1,$space);
+	}
+	fwrite($handle1,$cts);
+	fwrite($handle1,$space);
+	
+	if($average!=0)
+	{
+	fwrite($handle1,$y);
+	fwrite($handle1,$space);
+	fwrite($handle1,$average);
+	fwrite($handle1,$space);
+	}
+	$read=file_get_contents("feedback1.txt");
+	echo $read,"<br>";
+		}
+	}
+	
+
+$ob=new Feedback();
+$ob->fun();
+$ob->fun2();
+echo "<h3>Thank You Your feedback Is important for us<h3>";	
+	
+}
+?>
