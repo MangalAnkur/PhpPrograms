@@ -1,0 +1,74 @@
+<html>
+<body style='background-color:powderblue;'>
+<form method="post" action="" name='DETAILS' onsubmit="return fun();">
+ E-mail<br><input type="text" name="name">
+ <input type="submit" value="submit">
+</form>
+</body>
+</html>
+<?php 
+if($_POST)
+{
+$email='/^[a-z\d\._-]+@([a-z\d-]+\.)+[a-z]{2,6}$/i';
+$x=$_POST['name'];
+if(preg_match($email,$x))
+{
+echo "E-mail is Matched<br>";	
+}
+else 
+echo "Does not match<br>";
+echo "<h2> Pattern matching </h2>";
+$input='ankur.mangal@gmail.com';
+if(preg_match($email,$input))
+{
+echo "Matched<br>";	
+}
+else 
+echo "Does not match<br>";
+$input1='ankur1234.com';
+if(preg_match($email,$input1))
+{
+echo "Matched<br>";	
+}
+else 
+echo "Does not match<br>";
+$input2='gmail.com';
+if(preg_match($email,$input2))
+{
+echo "Matched<br>";	
+}
+else 
+echo "Does not match<br>";
+$input3='ankur.magal24@gmail.';
+if(preg_match($email,$input3))
+{
+echo "Matched<br>";	
+}
+else 
+echo "Does not match<br>";
+$input4='ankur.mangal24@hello.aysvyavx';
+if(preg_match($email,$input4))
+{
+echo "Matched<br>";	
+}
+else 
+echo "Does not match<br>";
+
+echo "<h2> Replace </h2>";
+$input5="Hello       Ankur";
+$x='/\s\s/';
+$clean=preg_replace($x,"    ", $input5);
+echo $clean,"<br>";
+
+echo "<h2> Extractinng data </h2>";
+$str="the data is 28,december 1996";
+$regex='/(d+),\s(\w+)\s(\d+)/';
+preg_match($regex,$str,$matches);
+
+
+$str = 'The date is 10, April 2007';
+$regex = '/(\d+),\s(\w+)\s(\d+)/';  //pattern of 10, April 2007
+$str1 = preg_replace($regex,'$1-$2-$3', $str);
+echo $str1;	
+}
+?>
