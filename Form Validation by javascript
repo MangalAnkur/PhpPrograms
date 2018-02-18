@@ -1,0 +1,44 @@
+<html>
+<head>
+<title> form validation </title>
+</head>
+<body style="background-color:powderblue;">
+<form name="details" onsubmit="return validatefun()" action=""  method="post">
+Enter Name<br><input type="text" name="fullname"><br><br>
+Password <br><input type="password" name="pass"><br><br>
+Confirm password <br><input type="password" name="pass1"><br><br>
+<br><input type="submit" name="submit">
+</form>
+
+<script type="text/javascript">
+function validatefun()
+{
+	if(document.details.fullname.value=="")
+	{
+		window.alert("Please enter name");
+		document.details.fullname.focus();
+		return false;
+	}
+	if(document.details.pass.value!== document.details.pass1.value)
+	{
+		window.alert("Password does not match");
+		document.details.pass1.focus();
+		return false;
+	}
+	if(document.details.pass.value=="")
+	{
+		window.alert("please enter password");
+		document.details.pass.focus();
+		return false;
+	}
+	if(document.details.pass1.value=="")
+	{
+		window.alert("please enter password");
+		document.details.pass1.focus();
+		return false;
+	}
+}
+
+</script>
+</body>
+</html>
